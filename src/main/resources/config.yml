@@ -1,0 +1,26 @@
+# Configuration for the plugin
+
+# Open EnderChest like ShulkerBox, with right click.
+enderchest: false
+
+# Auto restore.
+# if the server crash, and the player still have the shulkerbox opened, it will be restored.
+# if false, the shulkerbox will be crypt. Only an admin can help the player.
+# RECOMMENDED: false (for security reason)
+auto-restore: false
+
+# Click Anywhere
+# If true, you can click anywhere in your inventory,
+# to open a box, without click in Main Hand/Off Hand.
+anywhere: true
+
+# Shift Click in Main Hand/Off Hand
+shift-click: false
+
+messages:
+  restore:
+    no-item: "<gradient:aqua:blue><bold>vShulker</bold> <red>You are not holding a ShulkerBox."
+    failed: "<gradient:aqua:blue><bold>vShulker</bold> <red>This Shulker is not bugged or you are not holding a ShulkerBox."
+    success: "<gradient:aqua:blue><bold>vShulker</bold>  <green>ShulkerBox restored! <red>Check your inventory."
+  reload: "<gradient:aqua:blue><bold>vShulker</bold> <gradient:blue:yellow>Reloading the plugin..."
+  no-restore: "<red>The shulkerbox can't be restored. Please contact an admin."
