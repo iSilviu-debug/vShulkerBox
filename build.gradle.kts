@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "it.isilviu"
-version = "1.0-SNAPSHOT"
+version = "1.1-SNAPSHOT"
 
 repositories {
     mavenCentral()
@@ -18,7 +18,7 @@ repositories {
 
 dependencies {
     implementation("de.tr7zw:item-nbt-api:2.13.2")
-    compileOnly("io.papermc.paper:paper-api:1.21.1-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT")
 
     // Required for all platforms
     implementation("com.github.Revxrsal.Lamp:common:3.2.1")
@@ -44,7 +44,7 @@ tasks {
 
 
 java {
-    toolchain.languageVersion.set(JavaLanguageVersion.of(21))
+    toolchain.languageVersion.set(JavaLanguageVersion.of(17))
 }
 
 tasks.test {

@@ -85,6 +85,7 @@ public class ShulkerBoxListener implements Listener {
 
         Inventory clickedInventory = event.getClickedInventory();
         if (clickedInventory != null && clickedInventory.getType() != InventoryType.PLAYER) return; // ** And this also.
+        // TODO: Next update, i will add a thing to add shulker in /invsee
 
         ItemStack item = event.getCurrentItem();
         if (item == null || !item.getType().name().contains("SHULKER_BOX")) return;
