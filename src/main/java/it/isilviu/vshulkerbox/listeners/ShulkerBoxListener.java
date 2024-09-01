@@ -61,6 +61,9 @@ public class ShulkerBoxListener implements Listener {
     @EventHandler
     public void onInteract(PlayerInteractEvent event) {
         if (event.getAction() != Action.RIGHT_CLICK_AIR) return;
+        ItemStack itemStack = event.getItem();
+        if (itemStack == null || itemStack.getType() != Material.SHULKER_BOX) return;
+
         event.setUseInteractedBlock(Event.Result.DENY);
         event.setUseItemInHand(Event.Result.DENY);
 
@@ -85,7 +88,7 @@ public class ShulkerBoxListener implements Listener {
 
         Inventory clickedInventory = event.getClickedInventory();
         if (clickedInventory != null && clickedInventory.getType() != InventoryType.PLAYER) return; // ** And this also.
-        // TODO: Next update, i will add a thing to add shulker in /invsee
+        // TODO: Next update, i will add a thing to view shulker in /invsee
 
         ItemStack item = event.getCurrentItem();
         if (item == null || !item.getType().name().contains("SHULKER_BOX")) return;

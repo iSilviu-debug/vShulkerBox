@@ -2,4 +2,5 @@ name: vShulkerBox
 version: 1.1
 author: iSilviu
 website: silvio.top
+api-version: 1.13
 main: it.isilviu.vshulkerbox.vShulkerBox
