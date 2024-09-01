@@ -23,7 +23,7 @@ public class ShulkerCommand {
     @Subcommand("info")
     public void onInfo(BukkitCommandActor actor) {
         actor.audience().sendMessage(Messages.getMessage("""
-                <gradient:blue:yellow>Plugin <gradient:red:blue>vShulkerBox <gradient:yellow:green>v<gradient:green:blue>1.1
+                <gradient:blue:yellow>Plugin <gradient:red:blue>vShulkerBox <gradient:yellow:green>v<gradient:green:blue>1.2
                 <gray>Plugin developed by <aqua>silvio.top"""));
     }
 
