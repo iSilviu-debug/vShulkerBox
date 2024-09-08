@@ -61,11 +61,6 @@ public class ShulkerBoxListener implements Listener {
     @EventHandler
     public void onInteract(PlayerInteractEvent event) {
         if (event.getAction() != Action.RIGHT_CLICK_AIR) return;
-        ItemStack itemStack = event.getItem();
-        if (itemStack == null || itemStack.getType() != Material.SHULKER_BOX) return;
-
-        event.setUseInteractedBlock(Event.Result.DENY);
-        event.setUseItemInHand(Event.Result.DENY);
 
         if (config.getBoolean("shift-click", true) && !event.getPlayer().isSneaking()) return;
 
@@ -73,6 +68,9 @@ public class ShulkerBoxListener implements Listener {
 
         ItemStack item = event.getItem();
         if (item == null || !item.getType().name().contains("SHULKER_BOX")) return;
+
+        event.setUseInteractedBlock(Event.Result.DENY);
+        event.setUseItemInHand(Event.Result.DENY);
 
         int slot = event.getHand() == EquipmentSlot.HAND ? player.getInventory().getHeldItemSlot() : 40;
         this.openInventory(player, item, slot);
