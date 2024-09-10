@@ -94,6 +94,7 @@ public class ShulkerBoxListener implements Listener {
         event.setResult(Event.Result.DENY);
 
         // Always possible if you close inventory :D
+        player.updateInventory();
         player.closeInventory();
 
         this.openInventory(player, item, event.getSlot());
@@ -142,8 +143,8 @@ public class ShulkerBoxListener implements Listener {
             // rename Items -> Items_vShulkerBox
             ReadWriteNBT nbt = nbtCompound.getCompound("BlockEntityTag");
             if (nbt != null) {
-                nbtCompound.setString("BlockEntityTag_vShulkerBox", nbt.toString());
                 nbt.removeKey("Items");
+                nbtCompound.setString("BlockEntityTag_vShulkerBox", nbt.toString());
             }
         });
 
@@ -211,7 +212,9 @@ public class ShulkerBoxListener implements Listener {
         if (item == null) item = cursor;
 
         if (item.getType() == Material.AIR && event.getAction() == InventoryAction.HOTBAR_SWAP)
-            item = event.getWhoClicked().getInventory().getItem(event.getHotbarButton());
+            item = event.getHotbarButton() == -1
+                    ? event.getWhoClicked().getInventory().getItemInOffHand()
+                    : event.getWhoClicked().getInventory().getItem(event.getHotbarButton());
         if (item == null) return;
 
         ReadWriteNBT nbt = NBT.itemStackToNBT(item).getCompound("tag");

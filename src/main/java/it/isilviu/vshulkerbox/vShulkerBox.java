@@ -24,6 +24,7 @@ public class vShulkerBox extends JavaPlugin {
         return INSTANCE;
     }
 
+    private BukkitCommandHandler handler;
     private YamlFile config;
     private ShulkerBoxListener shulkerBoxListener; // Really? A field for a listener?
 
@@ -49,7 +50,7 @@ public class vShulkerBox extends JavaPlugin {
         registerListeners(shulkerBoxListener, new EnderchestListener(config));
 
         // Commands
-        BukkitCommandHandler handler = BukkitCommandHandler.create(this);
+        this.handler = BukkitCommandHandler.create(this);
         handler.register(new ShulkerCommand(config));
         // (Optional) Register colorful tooltips (Works on 1.13+ only) // From the wiki.
         handler.registerBrigadier();
@@ -59,6 +60,8 @@ public class vShulkerBox extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        handler.unregisterAllCommands();
+
         shulkerBoxListener.shulkerBoxes().forEach((uuid, entry) -> { // Silly, but it's a free source. (I tried .closeInventory anyway)
             Player player = getServer().getPlayer(uuid);
             if (player == null) return;
