@@ -1,6 +1,7 @@
 package it.isilviu.vshulkerbox.listeners;
 
 import com.google.common.collect.BiMap;
+import com.google.common.collect.Lists;
 import de.tr7zw.changeme.nbtapi.NBT;
 import de.tr7zw.changeme.nbtapi.iface.ReadWriteNBT;
 import io.papermc.paper.event.player.AsyncChatEvent;
@@ -32,6 +33,7 @@ import org.bukkit.inventory.meta.BlockStateMeta;
 
 import java.util.AbstractMap;
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 public class ShulkerBoxListener implements Listener {
@@ -80,7 +82,7 @@ public class ShulkerBoxListener implements Listener {
     public void onInteract(InventoryClickEvent event) {
         if (event.isCancelled()) return; // Imagine if someone open the Auction, and steal all the items. Lucky, we have this line. **
         if (!(event.getWhoClicked() instanceof Player player)) return;
-        if (event.getAction() != InventoryAction.PICKUP_HALF) return;
+        if (event.getAction() != InventoryAction.PICKUP_HALF) return; // Right click action.
 
         if (!config.getBoolean("anywhere", true)) return;
 
@@ -208,23 +210,29 @@ public class ShulkerBoxListener implements Listener {
     /** Secure method to remove the shulker box from the player's inventory */
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onInteractInventory(InventoryClickEvent event) {
+        List<ItemStack> itemStackList = Lists.newArrayList();
+
         ItemStack item = event.getCurrentItem(), cursor = event.getCursor();
         if (item == null) item = cursor;
 
-        if (item.getType() == Material.AIR && event.getAction() == InventoryAction.HOTBAR_SWAP)
+        itemStackList.add(item);
+        if (event.getAction() == InventoryAction.HOTBAR_SWAP) {
             item = event.getHotbarButton() == -1
                     ? event.getWhoClicked().getInventory().getItemInOffHand()
                     : event.getWhoClicked().getInventory().getItem(event.getHotbarButton());
-        if (item == null) return;
+            if (item != null) itemStackList.add(item);
+        }
 
-        ReadWriteNBT nbt = NBT.itemStackToNBT(item).getCompound("tag");
-        if (nbt != null) {
-            UUID uuid = nbt.getUUID("vShulkerBox");
-            if (uuid == null) return;
-            if (!shulkerBoxes.containsKey(uuid)) return;
+        for (ItemStack itemStack : itemStackList) {
+            ReadWriteNBT nbt = NBT.itemStackToNBT(itemStack).getCompound("tag");
+            if (nbt != null) {
+                UUID uuid = nbt.getUUID("vShulkerBox");
+                if (uuid == null) return;
+                if (!shulkerBoxes.containsKey(uuid)) return;
 
-            event.setCancelled(true);
-            event.setResult(Event.Result.DENY);
+                event.setCancelled(true);
+                event.setResult(Event.Result.DENY);
+            }
         }
     }
 }
