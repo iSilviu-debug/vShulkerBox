@@ -213,22 +213,22 @@ public class ShulkerBoxListener implements Listener {
         List<ItemStack> itemStackList = Lists.newArrayList();
 
         ItemStack item = event.getCurrentItem(), cursor = event.getCursor();
-        if (item == null) item = cursor;
+        if (item != null) itemStackList.add(item);
+        itemStackList.add(cursor); // Not Null.
 
-        itemStackList.add(item);
         if (event.getAction() == InventoryAction.HOTBAR_SWAP) {
-            item = event.getHotbarButton() == -1
+            ItemStack itemHotbar = event.getHotbarButton() == -1
                     ? event.getWhoClicked().getInventory().getItemInOffHand()
                     : event.getWhoClicked().getInventory().getItem(event.getHotbarButton());
-            if (item != null) itemStackList.add(item);
+            if (itemHotbar != null) itemStackList.add(itemHotbar);
         }
 
         for (ItemStack itemStack : itemStackList) {
             ReadWriteNBT nbt = NBT.itemStackToNBT(itemStack).getCompound("tag");
             if (nbt != null) {
                 UUID uuid = nbt.getUUID("vShulkerBox");
-                if (uuid == null) return;
-                if (!shulkerBoxes.containsKey(uuid)) return;
+                if (uuid == null) continue;
+                if (!shulkerBoxes.containsKey(uuid)) continue;
 
                 event.setCancelled(true);
                 event.setResult(Event.Result.DENY);

@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "it.isilviu"
-version = "1.5-SNAPSHOT"
+version = "1.6-SNAPSHOT"
 
 repositories {
     mavenCentral()
