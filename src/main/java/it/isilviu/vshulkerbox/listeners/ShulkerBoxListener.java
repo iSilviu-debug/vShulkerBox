@@ -74,6 +74,8 @@ public class ShulkerBoxListener implements Listener {
         event.setUseInteractedBlock(Event.Result.DENY);
         event.setUseItemInHand(Event.Result.DENY);
 
+        player.closeInventory(); // Close the inventory, if you have one open. (Prevent dupe)
+
         int slot = event.getHand() == EquipmentSlot.HAND ? player.getInventory().getHeldItemSlot() : 40;
         this.openInventory(player, item, slot);
     }
