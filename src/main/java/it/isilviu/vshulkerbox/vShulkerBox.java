@@ -1,12 +1,12 @@
 package it.isilviu.vshulkerbox;
 
-import de.tr7zw.changeme.nbtapi.NBT;
-import de.tr7zw.changeme.nbtapi.iface.ReadWriteNBT;
+import de.tr7zw.nbtapi.NBT;
+import de.tr7zw.nbtapi.iface.ReadWriteNBT;
 import it.isilviu.vshulkerbox.commands.ShulkerCommand;
 import it.isilviu.vshulkerbox.listeners.EnderchestListener;
 import it.isilviu.vshulkerbox.listeners.ShulkerBoxListener;
 import it.isilviu.vshulkerbox.utils.config.model.YamlFile;
-import it.isilviu.vshulkerbox.utils.bstats.bukkit.Metrics;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.block.ShulkerBox;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;

@@ -1,7 +1,7 @@
 package it.isilviu.vshulkerbox.commands;
 
-import de.tr7zw.changeme.nbtapi.NBT;
-import de.tr7zw.changeme.nbtapi.iface.ReadWriteNBT;
+import de.tr7zw.nbtapi.NBT;
+import de.tr7zw.nbtapi.iface.ReadWriteNBT;
 import it.isilviu.vshulkerbox.utils.config.Messages;
 import it.isilviu.vshulkerbox.utils.config.model.YamlFile;
 import org.bukkit.entity.Player;
@@ -23,7 +23,7 @@ public class ShulkerCommand {
     @Subcommand("info")
     public void onInfo(BukkitCommandActor actor) {
         actor.audience().sendMessage(Messages.getMessage("""
-                <gradient:blue:yellow>Plugin <gradient:red:blue>vShulkerBox <gradient:yellow:green>v<gradient:green:blue>1.2
+                <gradient:blue:yellow>Plugin <gradient:red:blue>vShulkerBox <gradient:yellow:green>v<gradient:green:blue>1.8
                 <gray>Plugin developed by <aqua>silvio.top"""));
     }
 

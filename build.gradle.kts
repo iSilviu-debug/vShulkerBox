@@ -4,20 +4,33 @@ plugins {
 }
 
 group = "it.isilviu"
-version = "1.7-SNAPSHOT"
+version = "1.8-SNAPSHOT"
 
 repositories {
     mavenCentral()
-    maven("https://repo.papermc.io/repository/maven-public/")
+    maven {
+        name = "PaperMC"
+        url = uri("https://repo.papermc.io/repository/maven-public/")
+    }
     maven {
         name = "CodeMC"
         url = uri("https://repo.codemc.io/repository/maven-public/")
     }
-    maven(url = "https://jitpack.io")
+    maven {
+        name = "Jitpack"
+        url = uri("https://jitpack.io")
+    }
+    maven {
+        name = "silvioRepo"
+        url = uri("https://repo.silvio.top/releases/")
+    }
 }
 
 dependencies {
-    implementation("de.tr7zw:item-nbt-api:2.13.2")
+    implementation("org.bstats:bstats-base:3.1.1")
+    implementation("org.bstats:bstats-bukkit:3.1.1")
+
+    compileOnly("de.tr7zw:item-nbt-api-plugin:2.15.0")
     compileOnly("io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT")
 
     // Required for all platforms
@@ -33,7 +46,7 @@ tasks.withType<JavaCompile> { // Preserve parameter names in the bytecode
 
 tasks {
     shadowJar {
-        relocate("de.tr7zw.changeme.nbtapi", "it.isilviu.vshulkerbox.lib.nbtapi")
+        relocate("org.bstats", "it.isilviu.vshulkerbox.lib.bstats")
         relocate("revxrsal", "it.isilviu.vshulkerbox.lib.revxrsal")
     }
 
